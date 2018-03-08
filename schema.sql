@@ -1,4 +1,5 @@
 CREATE TYPE STATUS AS ENUM ('enabled', 'disabled');
+CREATE TYPE ACCOUNT_TYPE AS ENUM ('user', 'administrator', 'developer');
 CREATE TYPE NOTE_STYLE AS ENUM ('comment', 'markdown', 'file', 'target', 'grade');
 
 CREATE TABLE users (
