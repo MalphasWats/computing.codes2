@@ -1,0 +1,3 @@
+DSN = 'dbname=database user=username password=password'
+SECRET_KEY = 'secret_key'
+MUNGE_FACTOR = 5000
