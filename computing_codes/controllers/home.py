@@ -24,7 +24,7 @@ def login():
         email = request.form.get('email')
         password_plaintext = request.form.get('password')
 
-        user = model.account.get_user(email, password_plaintext)
+        user = model.get_user(email, password_plaintext)
         if user:
             session['user'] = user
             return redirect(url_for('home.overview'))
