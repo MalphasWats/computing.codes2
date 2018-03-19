@@ -18,6 +18,7 @@
     <section>
 		{% block detail %} {% endblock %}
     
+        {{session['user']['forename']}} {{session['user']['surname']}}
     </section>
 </body>
 </html>

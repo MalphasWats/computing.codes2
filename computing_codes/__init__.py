@@ -16,7 +16,7 @@ def check_valid_login():
 
     login_valid = 'user' in session
     
-    #g.db_conn = computing_codes.model.connect()
+    g.db_conn = computing_codes.model.connect()
         
     if (request.endpoint and 
         'static' not in request.endpoint and 
