@@ -1,5 +1,5 @@
 import psycopg2, psycopg2.extras
-from lessonpad.settings import DSN, MUNGE_FACTOR
+from computing_codes.settings import DSN, MUNGE_FACTOR
 
 from flask import g, url_for
 

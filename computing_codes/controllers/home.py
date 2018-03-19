@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, session, redirect, url_for
+from flask import Blueprint, render_template, session, redirect, url_for, request
 from computing_codes import public_endpoint
 
-import lessonpad.model as model
+import computing_codes.model as model
 
 mod = Blueprint('home', __name__)
 
