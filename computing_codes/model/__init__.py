@@ -29,7 +29,7 @@ def get_user(email, password_plaintext):
     
     if r:
         if r['account_status'] == 'enabled':
-            if bcrypt.hashpw(password_plaintext.encode('utf-8'), r['password_hash'].encode('utf-8')) == r['password_hash']:
+            if bcrypt.checkpw(password_plaintext.encode('utf-8'), r['password_hash'].encode('utf-8')):
                 user = dict(r)
                 del user['password_hash']
                 return user
