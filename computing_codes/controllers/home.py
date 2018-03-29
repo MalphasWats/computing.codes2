@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request
+from flask import Blueprint, render_template, session, redirect, url_for, request, flash
 from computing_codes import public_endpoint
 
 import computing_codes.model as model
@@ -28,6 +28,8 @@ def login():
         if user:
             session['user'] = user
             return redirect(url_for('home.overview'))
+        else:
+            flash("Incorrect username or password.", category='error')
         
     return redirect(url_for('home.index'))
     

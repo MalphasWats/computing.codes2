@@ -13,7 +13,9 @@
 		<ul><li><a href="{{url_for('home.overview')}}">home</a></li><li><a href="#">link 1</a></li><li><a href="#">link 2</a></li><li><a href="#">link 3</a></li></ul>
 		</nav>
 		
-		
+		{% for message in get_flashed_messages(True) %}
+        <div class="flashmessage {{message[0]}}">{{ message[1] }}</div>
+        {% endfor %}
     </header>
     <section>
 		{% block content %} {% endblock %}
