@@ -25,9 +25,9 @@ def save_new():
         flash("Lessons MUST have a title.", category='error')
         return redirect(url_for('.create'))
     else:
-        project_id = model.save_new_project(session['user']['user_id'], title, description)
-        return redirect(url_for('.view_project', project_id=project_id))
+        project_code = model.save_new_project(session['user']['user_id'], title, description)
+        return redirect(url_for('.view_project', project_code=project_code))
     
-@mod.route('/<int:project_id>/')
-def view_project(project_id):
-    return "Not Implemented ({})".format(project_id)
+@mod.route('/<project_code>/')
+def view_project(project_code):
+    return "Not Implemented ({})".format(project_code)
