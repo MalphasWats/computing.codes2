@@ -7,7 +7,7 @@
     
     ... files ...
     
-    <form action="{{url_for('note.upload')}}" method="post" id="upload">
+    <form action="{{url_for('note.upload')}}" method="post" id="upload" enctype="multipart/form-data">
     <input id="project_code" name="project_code" type="hidden" value="{{project_details['project_code']}}">
     <ul>
         <li><label for="file">Upload a File</label><input id="file" name="file" type="file" size="16"> <label class="button"><input id="submit" type="submit" value="Upload"></label></li>
