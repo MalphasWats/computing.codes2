@@ -167,6 +167,11 @@ td
     
 }
 
+form ul, #project_list
+{
+    list-style-type: none;
+}
+
 @media (min-width: 700px)
 {
 	
