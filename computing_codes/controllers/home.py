@@ -15,7 +15,8 @@ def index():
     
 @mod.route('/overview')
 def overview():
-    return render_template('overview.html')
+    projects = model.get_projects(session['user']['user_id'])
+    return render_template('overview.html', projects=projects)
     
 @mod.route('/login', methods=['GET', 'POST'])
 @public_endpoint

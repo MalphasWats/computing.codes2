@@ -56,3 +56,18 @@ def save_new_project(owner_id, title, description):
     g.db_conn.commit()
     
     return project_id
+    
+def get_projects(user_id):
+    curs = g.db_conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    query = """SELECT p.project_id, generate_join_code(p.project_id) as join_code, title, description
+               FROM projects p
+               LEFT JOIN project_members m ON m.project_id=p.project_id
+               WHERE (p.owner_id = %(user_id)s
+               OR m.user_id = %(user_id)s)
+               AND not p.deleted;
+    """
+    
+    curs.execute(query, {'user_id': user_id} ))
+    r = curs.fetchall()
+    
+    return r
