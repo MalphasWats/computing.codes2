@@ -4,8 +4,6 @@
     <ul id="project_list">
     {% for p in projects %}
     <li>
-        <a class="no_award" id="lid{{l['lesson_id']}}"><span></span></a>
-        
         <h1>{{p['title']}} ({{p['join_code']}})</h1>
         <p>{{p['description']}}</p>
         <a href="{{url_for('project.view_project', project_id=p['project_id'])}}">View</a>
