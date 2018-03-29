@@ -32,5 +32,7 @@ def teardown_request(exception):
         
         
 import computing_codes.controllers.home
+import computing_codes.controllers.project
 
 app.register_blueprint(computing_codes.controllers.home.mod)
+app.register_blueprint(computing_codes.controllers.project.mod)
