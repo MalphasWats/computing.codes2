@@ -67,7 +67,7 @@ def get_projects(user_id):
                AND not p.deleted;
     """
     
-    curs.execute(query, {'user_id': user_id} ))
+    curs.execute(query, {'user_id': user_id})
     r = curs.fetchall()
     
     return r
