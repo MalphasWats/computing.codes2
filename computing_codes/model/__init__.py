@@ -89,7 +89,7 @@ def get_projects(user_id):
     
 def get_project_details(project_code):
     curs = g.db_conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    query = """SELECT p.project_id, generate_join_code(p.project_id) as project_code, title, description
+    query = """SELECT p.project_id, generate_join_code(p.project_id) as project_code, title, description, owner_id
                FROM projects p
                WHERE p.project_id = decode_join_code(%s)
                AND not p.deleted;

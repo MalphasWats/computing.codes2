@@ -43,4 +43,8 @@ def join():
 def view_project(project_code):
     details = model.get_project_details(project_code)
     #TODO: if no details, redirect with message.
-    return render_template('project_owner.html', project_details=details)
+    
+    if details['owner_id'] == session['user']['user_id']:
+        return render_template('project_owner.html', project_details=details)
+    else:
+        return render_template('project_member.html', project_details=details)
