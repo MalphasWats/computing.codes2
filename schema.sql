@@ -61,3 +61,35 @@ CREATE TABLE note_links (
   "links_to_note_id" INTEGER REFERENCES notes("note_id") ON DELETE CASCADE,
   PRIMARY KEY ("note_id", "links_to_note_id")
 );
+
+
+CREATE OR REPLACE FUNCTION generate_join_code(num int)
+RETURNS text
+AS $$
+    ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    BASE = len(ALPHABET)
+    MUNGE_FACTOR = 5000
+    
+    _num = num + MUNGE_FACTOR
+    c = ''
+    while _num:
+        _num, i = divmod(_num, BASE)
+        c = ALPHABET[i] + c
+        
+    return c
+$$ LANGUAGE plpythonu;
+
+CREATE OR REPLACE FUNCTION decode_join_code(code text)
+RETURNS int
+AS $$
+    ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    BASE = len(ALPHABET)
+    MUNGE_FACTOR = 5000
+    
+    num = 0
+    _code = code[::-1].upper()
+    for i, c in enumerate(_code):
+        p = ALPHABET.index(c)
+        num += p * (BASE**i)
+    return num - MUNGE_FACTOR
+$$ LANGUAGE plpythonu;
