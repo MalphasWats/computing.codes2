@@ -16,7 +16,7 @@ def index():
 def create():
     return render_template('new_project.html')
     
-@mod.route('/save_new')
+@mod.route('/save_new', methods=['POST'])
 def save_new():
     title = request.form.get('title')
     description = request.form.get('description')
