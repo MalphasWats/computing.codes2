@@ -30,4 +30,6 @@ def save_new():
     
 @mod.route('/<project_code>/')
 def view_project(project_code):
-    return "Not Implemented ({})".format(project_code)
+    details = model.get_project_details(project_code)
+    
+    return render_template('project_owner.html', project_details=details)

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+    {% block title %}{{project_details['title']}}{% endblock %}
+    {% block content %}
+    <h1> {{project_details['title']}} <span>{{project_details['project_code']}}</span></h1>
+    
+    <p>{{project_details['description']}}</p>
+    
+    ... list of members ...
+    
+    {% endblock %}
