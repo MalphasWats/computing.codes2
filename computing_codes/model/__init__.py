@@ -118,6 +118,6 @@ def save_uploaded_file(user_id, project_code, file):
     note_id = curs.fetchone()[0]
     g.db_conn.commit()
     
-    file.save(os.path.join(UPLOAD_BASEDIR, user_id, note_id, filename))
+    file.save(os.path.join(UPLOAD_BASEDIR, str(user_id), str(note_id), filename))
     
     return note_id
