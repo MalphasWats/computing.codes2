@@ -3,5 +3,12 @@
     {% block content %}
         <h1>Create a new project</h1>
         
-        ...
+        <form action="{{url_for('project.save_new')}}" method="post">
+            <ul>
+                <li><label for="title">Title</label><input id="title" name="title" type="text" size="21"></li>
+                <li><label for="description">Description</label><textarea id="description" name="description" rows="3" cols="30"></textarea></li>
+            
+                <li><label class="button"><input id="submit" type="submit" value="Create"></label></li>
+                </ul>
+        </form>
     {% endblock %}

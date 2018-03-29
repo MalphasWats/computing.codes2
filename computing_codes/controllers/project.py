@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, url_for, request
+from flask import Blueprint, render_template, session, redirect, url_for, request, flash
 #from computing_codes import public_endpoint
 
 import computing_codes.model as model
@@ -18,8 +18,15 @@ def create():
     
 @mod.route('/save_new')
 def save_new():
-    project_id = 0
-    return redirect(url_for('.view_project', project_id))
+    title = request.form.get('title')
+    description = request.form.get('description')
+    
+    if title == '' or title == 'Title':
+        flash("Lessons MUST have a title.", category='error')
+        return redirect(url_for('.create'))
+    else:
+        project_id = model.save_new_project(session['user']['user_id'], title, description)
+        return redirect(url_for('.view_project', project_id))
     
 @mod.route('/<int:project_id>/')
 def view_project(project_id):

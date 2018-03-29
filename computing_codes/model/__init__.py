@@ -40,3 +40,19 @@ def get_user(email, password_plaintext):
             #flash failure
             pass
     return False
+    
+def save_new_project(owner_id, title, description):
+
+    curs = g.db_conn.cursor()
+    
+    query = """INSERT INTO projects (owner_id, title, description)
+               VALUES (%s, %s, %s)
+               RETURNING project_id;
+    """
+    
+    curs.execute(query, (owner_id, title, description))
+    
+    project_id = curs.fetchone()[0]
+    g.db_conn.commit()
+    
+    return project_id
