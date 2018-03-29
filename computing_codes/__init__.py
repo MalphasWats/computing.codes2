@@ -33,6 +33,8 @@ def teardown_request(exception):
         
 import computing_codes.controllers.home
 import computing_codes.controllers.project
+import computing_codes.controllers.note
 
 app.register_blueprint(computing_codes.controllers.home.mod)
 app.register_blueprint(computing_codes.controllers.project.mod, url_prefix='/project')
+app.register_blueprint(computing_codes.controllers.note.mod, url_prefix='/note')

@@ -1,7 +1,8 @@
 import psycopg2, psycopg2.extras
-from computing_codes.settings import DSN, MUNGE_FACTOR
+from computing_codes.settings import DSN, MUNGE_FACTOR, UPLOAD_BASEDIR
 
 from flask import g, url_for
+from werkzeug.utils import secure_filename
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 
@@ -9,6 +10,8 @@ import bcrypt
 import random
 
 import datetime
+
+import os
 
 def connect():
     conn = psycopg2.connect(DSN)
@@ -99,3 +102,22 @@ def get_project_details(project_code):
     r = curs.fetchone()
     
     return r
+    
+def save_uploaded_file(user_id, project_code, file):
+    filename = secure_filename(file.filename)
+    
+    curs = g.db_conn.cursor()
+    
+    query = """INSERT INTO notes (owner_id, project_id, content, style)
+               VALUES (%s, decode_join_code(%s), %s, 'file')
+               RETURNING note_id;
+    """
+    
+    curs.execute(query, (user_id, project_code, filename))
+    
+    note_id = curs.fetchone()[0]
+    g.db_conn.commit()
+    
+    file.save(os.path.join(UPLOAD_BASEDIR, user_id, note_id, filename))
+    
+    return note_id
