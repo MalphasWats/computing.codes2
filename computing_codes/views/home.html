@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>computing.codes</title>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main.css')}}">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <header>
-        <h1>computing<span>.codes</span></h1>
-    </header>
-    <section>
-		{% block detail %} {% endblock %}
+{% extends "layout.html" %}
+    {% block title %}Log in{% endblock %}
+    {% block content %}
+        <h1>Log in</h1>
+        
         <form action="{{url_for('home.login')}}" method="post" id="login_form">
 		    <h1>Login</h1>
             <ul>
@@ -68,6 +60,4 @@
             })();
             </script>
 		</form>
-    </section>
-</body>
-</html>
+    {% endblock %}
