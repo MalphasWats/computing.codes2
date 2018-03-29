@@ -26,7 +26,7 @@ def save_new():
         return redirect(url_for('.create'))
     else:
         project_id = model.save_new_project(session['user']['user_id'], title, description)
-        return redirect(url_for('.view_project', project_id))
+        return redirect(url_for('.view_project', project_id=project_id))
     
 @mod.route('/<int:project_id>/')
 def view_project(project_id):
