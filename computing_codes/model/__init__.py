@@ -57,6 +57,21 @@ def save_new_project(owner_id, title, description):
     
     return project_code
     
+def join_project(user_id, project_code):
+    curs = g.db_conn.cursor()
+    
+    query = """INSERT INTO project_members (project_id, user_id)
+               VALUES (decode_join_code(%s), %s)
+               RETURNING generate_join_code(project_id) as project_code;
+    """
+    
+    curs.execute(query, (project_code, user_id))
+    
+    project_code = curs.fetchone()[0]
+    g.db_conn.commit()
+    
+    return project_code
+    
 def get_projects(user_id):
     curs = g.db_conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     query = """SELECT p.project_id, generate_join_code(p.project_id) as project_code, title, description

@@ -27,9 +27,20 @@ def save_new():
     else:
         project_code = model.save_new_project(session['user']['user_id'], title, description)
         return redirect(url_for('.view_project', project_code=project_code))
+        
+@mod.route('/join', methods=['POST'])
+def join():
+    project_code = request.form.get('project_code')
+    
+    if project_code == '' or project_code == 'Project Code':
+        return redirect(url_for('home.overview'))
+    else:
+        project_code = model.join_project(session['user']['user_id'], project_code)
+        #TODO: if no project code, redirect with message
+        return redirect(url_for('.view_project', project_code=project_code))
     
 @mod.route('/<project_code>/')
 def view_project(project_code):
     details = model.get_project_details(project_code)
-    
+    #TODO: if no details, redirect with message.
     return render_template('project_owner.html', project_details=details)

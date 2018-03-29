@@ -1,6 +1,12 @@
 {% extends "layout.html" %}
     {% block title %}Overview{% endblock %}
     {% block content %}
+    
+    <form action="{{url_for('project.join')}}" method="post" id="login_form">
+    <ul>
+        <li><label for="project_code">Project Code</label><input id="project_code" name="project_code" type="text" size="16"> <label class="button"><input id="submit" type="submit" value="Join"></label></li>
+    </ul>
+    
     <ul id="project_list">
     {% for p in projects %}
     <li>
